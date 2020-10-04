@@ -1,0 +1,4 @@
+rootProject.name = 'Mail.ru.Project'
+include 'models'
+include 'controller'
+
