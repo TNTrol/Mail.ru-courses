@@ -1,7 +1,10 @@
 import com.google.gson.Gson;
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import nl.pvanassen.guicejunitrunner.GuiceJUnitRunner;
+import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,9 +21,15 @@ import java.util.List;
 @GuiceJUnitRunner.GuiceModules(MainTest.TestModule.class)
 public class MainTest {
 
+    public static class TestModule extends AbstractModule {
+        @Override
+        protected void configure() {
+            bind(IBooksFactory.class).toInstance(Mockito.mock(IBooksFactory.class));
+        }
+    }
 
     @Inject
-    private IBooksFactory _factory;
+    private @NotNull IBooksFactory _factory;
 
     private final Author[] _authors = {new Author("author1"), new Author("author2"), new Author("author3")};
     private final Book[] _books = {new Book("book1", _authors[1]), new Book("book2", _authors[1]),
@@ -30,13 +39,6 @@ public class MainTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
     private final Gson _gson = new Gson();
-
-    public static class TestModule extends AbstractModule {
-        @Override
-        protected void configure() {
-            bind(IBooksFactory.class).toInstance(Mockito.mock(IBooksFactory.class));
-        }
-    }
 
     @Before
     public void before()
