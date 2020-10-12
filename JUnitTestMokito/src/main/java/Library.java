@@ -36,6 +36,11 @@ public class Library {
         _books.add(book);
     }
 
+    public int size()
+    {
+        return _books.size();
+    }
+
     public void printLibrary()
     {
         System.out.println(_gson.toJson(_books));
