@@ -1,0 +1,3 @@
+rootProject.name = 'JUnitTestMokito'
+include 'Library'
+
