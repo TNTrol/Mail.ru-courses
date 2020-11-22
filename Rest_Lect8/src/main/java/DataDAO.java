@@ -16,12 +16,10 @@ public class DataDAO {
 
     public DataDAO(String fileName)
     {
-
         _products = readFromFile(fileName);
         if(_products == null)
             _products = new HashMap<>();
         _fileName = fileName;
-
     }
 
     public void addProduct(Product product)
